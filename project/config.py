@@ -5,4 +5,5 @@ default_city1 = 'Донецк'
 default_city2 = 'Киев'
 default_city3 = 'Москва'
 
-chosen_city = []
+# chosen_city = []
+selected_city = {}

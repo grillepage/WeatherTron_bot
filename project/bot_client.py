@@ -23,7 +23,8 @@ def choose_mode(message):
     elif message.text == 'Отмена':
         say_clone(message)
     else:
-        config.chosen_city.insert(0 ,message.text)
+        # config.chosen_city.insert(0 ,message.text) - строчка для хранения города в массиве
+        config.selected_city[message.chat.id] = message.text
         mode_menu = types.ReplyKeyboardMarkup(True, False)
         mode_menu.row('Погода сейчас', 'Погода на завтра', 'Погода на период')
         mode_menu.row('Отмена')
@@ -35,7 +36,10 @@ def result(message):
         say_clone(message)
     else:
         # Вместо этого нужно расписать варианты работы с каждым режимом прогноза
-        bot.send_message(message.chat.id, 'Ваш город: ' + config.chosen_city[0])
+        bot.send_message(message.chat.id, 'Ваш город: ' + config.selected_city[message.chat.id])
+        print(config.selected_city)
+        config.selected_city.pop(message.chat.id)
+
 
 def say_clone(message):
     startmenu = types.ReplyKeyboardMarkup(True, True)
