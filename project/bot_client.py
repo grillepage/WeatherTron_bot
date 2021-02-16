@@ -41,6 +41,11 @@ def result(message):
         to_start.row(config.to_start_key)
         bot.send_message(message.chat.id, server.today_weather(config.selected_city[message.chat.id]), reply_markup=to_start)
         config.selected_city.pop(message.chat.id)
+    elif message.text == 'Погода на завтра':
+        to_start = types.ReplyKeyboardMarkup(True, True)
+        to_start.row(config.to_start_key)
+        bot.send_message(message.chat.id, server.tomorrow_weather(config.selected_city[message.chat.id]), reply_markup=to_start)
+        config.selected_city.pop(message.chat.id)
     else:
         # Вместо этого нужно расписать варианты работы с каждым режимом прогноза
         bot.send_message(message.chat.id, 'Ваш город: ' + config.selected_city[message.chat.id])
